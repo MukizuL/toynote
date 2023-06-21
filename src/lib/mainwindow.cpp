@@ -53,7 +53,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, &MainWindow::notebookCreated, [this] { setWindowModified(true); });
     // Здесь можно присоединить сигналы готовности/закрытия записной книжки к слотам, отвечающим за
     // включение/отключение действий, требующих её наличия
-    // <...>
+    connect(this, &MainWindow::notebookReady, [this] { setEnableNotebookUi(true); });
+    connect(this, &MainWindow::notebookClosed, [this] { setEnableNotebookUi(false); });
     // Отображаем GUI, сгенерированный из файла mainwindow.ui, в данном окне
     mUi->setupUi(this);
     // Настраиваем таблицу заметок, чтобы её последняя колонка занимала всё доступное место
