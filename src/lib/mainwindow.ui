@@ -87,6 +87,9 @@
    <property name="toolTip">
     <string>Create a new notebook</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
   </action>
   <action name="actionNew_Note">
    <property name="icon">
@@ -128,6 +131,9 @@
    <property name="toolTip">
     <string>Save the notebook</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
   </action>
   <action name="actionOpen_Notebook">
    <property name="icon">
@@ -140,6 +146,9 @@
    <property name="toolTip">
     <string>Open a notebook</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionClose_Notebook">
    <property name="text">
@@ -147,6 +156,9 @@
    </property>
    <property name="toolTip">
     <string>Close the notebook</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+C</string>
    </property>
   </action>
   <action name="actionSave_As">
@@ -160,6 +172,9 @@
    <property name="toolTip">
     <string>Save the notebook to a chosen file</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
   </action>
   <action name="actionVisit_Website">
    <property name="text">
@@ -172,6 +187,9 @@
    </property>
    <property name="text">
     <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+X</string>
    </property>
   </action>
  </widget>
