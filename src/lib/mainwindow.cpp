@@ -357,26 +357,58 @@ void MainWindow::deleteNotes()
         return;
     }
     // Здесь можно запросить подтверждение удаления
-    // <...>
+    // Создаём окно с вопросом о сохранении файла
+    QMessageBox deleteQuery(this);
+    // Устанавливаем иконку вопроса
+    deleteQuery.setIcon(QMessageBox::Question);
+    // Ставим название программы в заголовок
+    deleteQuery.setWindowTitle(Config::applicationName);
+    // Получаем от таблицы заметок список индексов выбранных в настоящий момент
+    // элементов
+    QModelIndexList idc = mUi->notesView->selectionModel()->selectedRows();
     // Для хранения номеров строк создаём STL-контейнер "множество", элементы
     // которого автоматически упорядочиваются по возрастанию
     std::set<int> rows;
+    QString indexNotes;
+    int k = 1;
+    for (const auto &i : idc)
     {
-        // Получаем от таблицы заметок список индексов выбранных в настоящий момент
-        // элементов
-        QModelIndexList idc = mUi->notesView->selectionModel()->selectedRows();
-        // Вставляем номера выбранных строк в rows
-        for (const auto &i : idc)
-        {
-            rows.insert(i.row());
+        rows.insert(i.row());
+        if(k % 2 == 0){
+            indexNotes.append(", ");
         }
+        indexNotes.append(QString::number(i.row()));
+        k++;
     }
-    // Обходим множество номеров выбранных строк *по убыванию*, чтобы удаление предыдущих
-    // не сбивало нумерацию следующих
-    for (auto it = rows.rbegin(); it != rows.rend(); ++it)
+    // Устанавливаем текст вопроса. Вместо %1 метод arg() подставит в строку
+    // QString indexNotes
+    deleteQuery.setText(tr("Would you like to delete note: %1?").arg(indexNotes));
+    // Добавляем в окно стандартные кнопки: Да и Нет
+    deleteQuery.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    // Выбираем кнопку по умолчанию — Нет
+    deleteQuery.setDefaultButton(QMessageBox::No);
+    // Выводим модальный диалог saveQuery и смотрим результат
+    switch (deleteQuery.exec())
     {
-        // Удаляем строку
-        mNotebook->erase(*it);
+    case QMessageBox::Yes: // Да
+        // Удаляем заметку
+    {
+            std::set<int> rows;
+            {
+                // Вставляем номера выбранных строк в rows
+                for (const auto &i : idc)
+                {
+                    rows.insert(i.row());
+                }
+            }
+            // Обходим множество номеров выбранных строк *по убыванию*, чтобы удаление предыдущих
+            // не сбивало нумерацию следующих
+            for (auto it = rows.rbegin(); it != rows.rend(); ++it)
+            {
+                // Удаляем строку
+                mNotebook->erase(*it);
+            }
+    }
     }
 }
 
