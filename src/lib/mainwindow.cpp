@@ -370,20 +370,20 @@ void MainWindow::deleteNotes()
     // Для хранения номеров строк создаём STL-контейнер "множество", элементы
     // которого автоматически упорядочиваются по возрастанию
     std::set<int> rows;
-    QString indexNotes;
+    QString indexNotesString;
+    QVariant indexNotes;
     int k = 1;
-    for (const auto &i : idc)
-    {
-        rows.insert(i.row());
+    for (const QModelIndex& index : idc) {
+        indexNotes = index.data();
         if(k % 2 == 0){
-            indexNotes.append(", ");
-        }
-        indexNotes.append(QString::number(i.row()));
+                indexNotesString.append(", ");
+            }
+        indexNotesString.append(indexNotes.toString());
         k++;
     }
     // Устанавливаем текст вопроса. Вместо %1 метод arg() подставит в строку
     // QString indexNotes
-    deleteQuery.setText(tr("Would you like to delete note: %1?").arg(indexNotes));
+    deleteQuery.setText(tr("Would you like to delete note: %1?").arg(indexNotesString));
     // Добавляем в окно стандартные кнопки: Да и Нет
     deleteQuery.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     // Выбираем кнопку по умолчанию — Нет
