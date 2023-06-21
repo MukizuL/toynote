@@ -81,7 +81,11 @@ void EditNoteDialog::accept()
     QString title = mUi->titleEdit->text();
     QString text = mUi->plainTextEdit->toPlainText();
     // Здесь можно проверить, что заголовок или текст заметки не пусты
-    // <...>
+    if(title.isEmpty() || text.isEmpty()){
+        QMessageBox::critical(this, "Critical Error", "Title and text of the note should not be empty!");
+    }
+    else
+    {
     // Читаем заголовок и текст заметки из полей диалога и записываем
     // их в соответствующие атрибуты заметки по указателю mNote
     mNote->setTitle(title);
@@ -93,4 +97,5 @@ void EditNoteDialog::accept()
     // Таким образом, в данном случае метод EditNoteDialog::accept() не подменяет
     // собой метод QDialog::accept() совсем, а дополняет его.
     QDialog::accept();
+    }
 }
