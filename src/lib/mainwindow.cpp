@@ -435,6 +435,7 @@ void MainWindow::exit()
 {
     // Здесь можно закрыть главное окно программы с помощью MainWindow::close()
     // <...>
+    MainWindow::close();
 }
 
 /*!
