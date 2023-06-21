@@ -97,7 +97,7 @@ void MainWindowTest::testNotebookDependentWidgetsEnabled()
 
 void MainWindowTest::testVisitWebsite()
 {
-    Testlib::UrlVisitTestHandler https_handler(QUrl("https://www.yandex.ru"));
+    Testlib::UrlVisitTestHandler https_handler(QUrl("https://www.google.com"));
     QDesktopServices::setUrlHandler("https", &https_handler, "handle");
     Testlib::LastVisitedUrlHandler http_handler;
     QDesktopServices::setUrlHandler("http", &http_handler, "handle");

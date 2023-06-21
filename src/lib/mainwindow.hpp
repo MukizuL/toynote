@@ -10,6 +10,7 @@
 
 #include <QMainWindow>
 
+
 #include "notebook.hpp"
 #include "toynote_global.hpp"
 
@@ -45,6 +46,8 @@ public:
      * обрабатывать сигналы, например от активации пункта меню
      */
 public slots:
+    void readSettings();
+    void selectFont();
     //! Отображает окно с информацией о программе.
     void displayAbout();
     //! Создаёт новую записную книжку.

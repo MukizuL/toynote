@@ -5,6 +5,7 @@
  */
 #include "mainwindow.hpp"
 // Заголовочный файл UI-класса, сгенерированного на основе mainwindow.ui
+#include "qsettings.h"
 #include "ui_mainwindow.h"
 
 #include <set>
@@ -19,6 +20,8 @@
 #include <QSaveFile>
 #include <QUrl>
 #include <QtGlobal> // qVersion()
+#include <QFontDialog>
+#include <QFont>
 
 #include "config.hpp"
 #include "editnotedialog.hpp"
@@ -63,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     refreshWindowTitle();
     // Создаём новую записную книжку
     newNotebook();
+    readSettings();
 }
 
 /*!
@@ -413,6 +417,26 @@ void MainWindow::deleteNotes()
     }
 }
 
+void MainWindow::selectFont()
+{
+    bool ok;
+    QFont font = QFontDialog::getFont(&ok, QFont("Helvetica [Cronyx]", 10), this);
+    if (ok) {
+            mUi->notesView->setFont(font);
+    } else {
+
+    }
+    QSettings settings("SiberianUniversityProject","Toynote");
+    settings.setValue("Font", font);
+}
+
+void MainWindow::readSettings()
+{
+    QSettings settings("SiberianUniversityProject","Toynote");
+    QFont font = qvariant_cast<QFont>(settings.value("Font"));
+    mUi->notesView->setFont(font);
+}
+
 void MainWindow::refreshWindowTitle()
 {
     QString nbname = notebookName();
@@ -461,7 +485,7 @@ void MainWindow::visitWebsite()
 {
     // Здесь можно открыть URL с помощью QDesktopServices::openUrl()
     // <...>
-    QDesktopServices::openUrl(QUrl("https://wwww.yandex.ru"));
+    QDesktopServices::openUrl(QUrl("https://www.google.com"));
 }
 
 void MainWindow::exit()
