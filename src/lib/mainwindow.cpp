@@ -54,7 +54,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // сигнал MainWindow::notebookCreated будет вызывать код, записанный в
     // фигурных скобках, то есть метод MainWindow::setWindowModified() с параметром true.
     connect(this, &MainWindow::notebookCreated, [this] { setWindowModified(true); });
-    connect(this, &MainWindow::notebookSaved, [this] { setWindowModified(false); });
     // Здесь можно присоединить сигналы готовности/закрытия записной книжки к слотам, отвечающим за
     // включение/отключение действий, требующих её наличия
     connect(this, &MainWindow::notebookReady, [this] { setEnableNotebookUi(true); });
@@ -316,12 +315,9 @@ bool MainWindow::newNote()
     {
         return false;
     }
-    else{
-        // Вставляем заметку в записную книжку
-        addNote(note);
-        setWindowModified(true);
-        return true;
-    }
+    // Вставляем заметку в записную книжку
+    addNote(note);
+    return true;
 }
 
 bool MainWindow::editNote(const QModelIndex &idx)
@@ -352,12 +348,9 @@ bool MainWindow::editNote(const QModelIndex &idx)
     {
         return false;
     }
-    else{
-        // Обновляем заметку в записной книжке
-        setNote(idx.row(), note);
-        setWindowModified(true);
-        return true;
-    }
+    // Обновляем заметку в записной книжке
+    setNote(idx.row(), note);
+    return true;
 }
 
 void MainWindow::deleteNotes()
@@ -419,7 +412,6 @@ void MainWindow::deleteNotes()
                 // Удаляем строку
                 mNotebook->erase(*it);
             }
-            setWindowModified(true);
     }
     }
 }
@@ -442,8 +434,7 @@ void MainWindow::refreshWindowTitle()
         // и имя текущей записной книжки (nbname)
         // Метка "[*]" обозначает место, куда будет подставлена звёздочка, если
         // установлен флаг изменения окна (см. QWidget::setWindowModified())
-        //setWindowTitle(tr("%1 - %2[*]").arg(Config::applicationName).arg(nbname));
-        setWindowTitle(tr("%1 - %2[*]").arg(Config::applicationName, nbname));
+        setWindowTitle(tr("%1 - %2[*]").arg(Config::applicationName).arg(nbname));
     }
     else
     {
