@@ -1,6 +1,6 @@
 name: Compile and Release Qt6 Proyect
 
-on: pull_request
+on: push
 
 env:
   QT_VERSION:     "6.2.0"
@@ -91,6 +91,10 @@ jobs:
         CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
       run: qmake ${{github.workspace}}/toynote.pro -spec win32-g++ -o ${{github.workspace}}/build "CONFIG+=qtquickcompiler" 
       #cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "CodeBlocks - MinGW Makefiles" -B ${{github.workspace}}/build
+    -
+      name: Check paths
+      run: |
+        ls ${{github.workspace}} | ls ${{github.workspace}}/build
     -
       name: Build project
       working-directory: ${{github.workspace}}
