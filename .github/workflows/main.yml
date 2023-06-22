@@ -1,6 +1,6 @@
 name: Compile and Release Qt6 Proyect
 
-on: push
+on: pull_request
 
 env:
   QT_VERSION:     "6.2.0"
@@ -93,7 +93,7 @@ jobs:
       #cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "CodeBlocks - MinGW Makefiles" -B ${{github.workspace}}/build
     -
       name: Build project
-      working-directory: ${{github.workspace}}/build
+      working-directory: ${{github.workspace}}
       run: |
         mingw32-make.exe -f ${{github.workspace}}/build/Makefile qmake_all
     -
