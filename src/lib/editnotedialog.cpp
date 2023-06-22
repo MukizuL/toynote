@@ -81,7 +81,7 @@ void EditNoteDialog::accept()
     QString title = mUi->titleEdit->text();
     QString text = mUi->plainTextEdit->toPlainText();
     // Здесь можно проверить, что заголовок или текст заметки не пусты
-    if(title.isEmpty() || text.isEmpty()){
+    if(title.isEmpty() || text.isEmpty()){                                                                  //Simple check if empty, than error
         QMessageBox::critical(this, "Critical Error", "Title and text of the note should not be empty!");
     }
     else

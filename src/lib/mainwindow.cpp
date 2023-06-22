@@ -53,12 +53,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // скобках записывается тело этой функции. Таким образом, в данном случае
     // сигнал MainWindow::notebookCreated будет вызывать код, записанный в
     // фигурных скобках, то есть метод MainWindow::setWindowModified() с параметром true.
-    connect(this, &MainWindow::notebookCreated, [this] { setWindowModified(true); });
-    connect(this, &MainWindow::notebookSaved, [this] { setWindowModified(false); });
+    connect(this, &MainWindow::notebookCreated, [this] { setWindowModified(true); });                   //Fix modified file status
+    connect(this, &MainWindow::notebookSaved, [this] { setWindowModified(false); });                    //
     // Здесь можно присоединить сигналы готовности/закрытия записной книжки к слотам, отвечающим за
     // включение/отключение действий, требующих её наличия
-    connect(this, &MainWindow::notebookReady, [this] { setEnableNotebookUi(true); });
-    connect(this, &MainWindow::notebookClosed, [this] { setEnableNotebookUi(false); });
+    connect(this, &MainWindow::notebookReady, [this] { setEnableNotebookUi(true); });                   //Simple connect signals to slots
+    connect(this, &MainWindow::notebookClosed, [this] { setEnableNotebookUi(false); });                 //
     // Отображаем GUI, сгенерированный из файла mainwindow.ui, в данном окне
     mUi->setupUi(this);
     // Настраиваем таблицу заметок, чтобы её последняя колонка занимала всё доступное место
@@ -382,14 +382,14 @@ void MainWindow::deleteNotes()
     std::set<int> rows;
     QString indexNotesString;
     QVariant indexNotes;
-    int k = 1;
-    for (const QModelIndex& index : idc) {
-        indexNotes = index.data();
-        if(k % 2 == 0){
-                indexNotesString.append(", ");
-            }
-        indexNotesString.append(indexNotes.toString());
-        k++;
+    int k = 1;                                              //
+    for (const QModelIndex& index : idc) {                  //
+        indexNotes = index.data();                          //
+        if(k % 2 == 0){                                     //
+                indexNotesString.append(", ");              //
+            }                                               //
+        indexNotesString.append(indexNotes.toString());     //Creating string of titles with commas
+        k++;                                                //
     }
     // Устанавливаем текст вопроса. Вместо %1 метод arg() подставит в строку
     // QString indexNotes
@@ -419,7 +419,7 @@ void MainWindow::deleteNotes()
                 // Удаляем строку
                 mNotebook->erase(*it);
             }
-            setWindowModified(true);
+            setWindowModified(true);                    //If deleted, file is modified
     }
     }
 }
