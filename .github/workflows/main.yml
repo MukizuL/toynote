@@ -85,11 +85,12 @@ jobs:
 #        Write-Output (Get-Command mingw32-make.exe).Path
 #        mingw32-make.exe -version  
     -
-      name: Configure CMake Proyect
+      name: Configure QMake Proyect
       working-directory: ${{github.workspace}}
       env:
         CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
-      run: cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "CodeBlocks - MinGW Makefiles" -B ${{github.workspace}}/build
+      run: qmake ${{github.workspace}}/toynote.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+      #cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "CodeBlocks - MinGW Makefiles" -B ${{github.workspace}}/build
     -
       name: Build proyect
       working-directory: ${{github.workspace}}/build
