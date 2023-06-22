@@ -4,11 +4,14 @@
  * \author Кирилл Пушкарёв
  */
 #include "notebook.hpp"
+#include "qsettings.h"
 
 #include <iterator> // next()
 #include <stdexcept> // runtime_error
 
 #include <QString> // QString::number()
+#include <QFontDialog>
+#include <QFont>
 
 #include "note.hpp"
 
@@ -79,14 +82,21 @@ QVariant Notebook::data(const QModelIndex &index, int role) const
     // Если требуется текст для отображения...
     if (role == Qt::DisplayRole)
     {
+        QString title = mNotes[index.row()].title();
+
         // Если столбец первый, возвращаем заголовок заметки, находящейся
         // в соответствующей строке таблицы
         if (index.column() == 0)
         {
             // При возврате строка заголовка (QString) автоматически преобразуется
             // в QVariant
-            return mNotes[index.row()].title();
+            return title;
         }
+    }
+    else if (role == Qt::FontRole){
+        QSettings settings("SiberianUniversityProject","Toynote");
+        QFont font = qvariant_cast<QFont>(settings.value("Font"));
+        return font;
     }
     // Игнорируем все остальные запросы, возвращая пустой QVariant
     return QVariant();

@@ -66,7 +66,6 @@ MainWindow::MainWindow(QWidget *parent) :
     refreshWindowTitle();
     // Создаём новую записную книжку
     newNotebook();
-    readSettings();
 }
 
 /*!
@@ -421,20 +420,8 @@ void MainWindow::selectFont()
 {
     bool ok;
     QFont font = QFontDialog::getFont(&ok, QFont("Helvetica [Cronyx]", 10), this);
-    if (ok) {
-            mUi->notesView->setFont(font);
-    } else {
-
-    }
     QSettings settings("SiberianUniversityProject","Toynote");
     settings.setValue("Font", font);
-}
-
-void MainWindow::readSettings()
-{
-    QSettings settings("SiberianUniversityProject","Toynote");
-    QFont font = qvariant_cast<QFont>(settings.value("Font"));
-    mUi->notesView->setFont(font);
 }
 
 void MainWindow::refreshWindowTitle()
@@ -485,7 +472,7 @@ void MainWindow::visitWebsite()
 {
     // Здесь можно открыть URL с помощью QDesktopServices::openUrl()
     // <...>
-    QDesktopServices::openUrl(QUrl("https://www.google.com"));
+    QDesktopServices::openUrl(QUrl("https://ikit.sfu-kras.ru"));
 }
 
 void MainWindow::exit()

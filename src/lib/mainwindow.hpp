@@ -46,7 +46,6 @@ public:
      * обрабатывать сигналы, например от активации пункта меню
      */
 public slots:
-    void readSettings();
     void selectFont();
     //! Отображает окно с информацией о программе.
     void displayAbout();

@@ -84,7 +84,7 @@ void MainWindowTest::testFileShortcuts()
     QVERIFY(m);
     for (QAction *a : m->actions())
     {
-        QVERIFY2(!a->shortcut().isEmpty(), qUtf8Printable(QString("No keyboard shortcut for action %1").arg(a->text())));
+        QVERIFY2(a->isSeparator() || !a->shortcut().isEmpty(), qUtf8Printable(QString("No keyboard shortcut for action %1").arg(a->text())));
     }
 }
 
@@ -97,7 +97,7 @@ void MainWindowTest::testNotebookDependentWidgetsEnabled()
 
 void MainWindowTest::testVisitWebsite()
 {
-    Testlib::UrlVisitTestHandler https_handler(QUrl("https://www.google.com"));
+    Testlib::UrlVisitTestHandler https_handler(QUrl("https://ikit.sfu-kras.ru"));
     QDesktopServices::setUrlHandler("https", &https_handler, "handle");
     Testlib::LastVisitedUrlHandler http_handler;
     QDesktopServices::setUrlHandler("http", &http_handler, "handle");

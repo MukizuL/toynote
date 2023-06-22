@@ -49,7 +49,6 @@
     <addaction name="actionSave_As"/>
     <addaction name="actionClose_Notebook"/>
     <addaction name="actionExit"/>
-    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -208,7 +207,8 @@
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset theme="window-close"/>
+    <iconset theme="window-close">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Exit</string>
@@ -437,6 +437,5 @@
   <slot>exit()</slot>
   <slot>editNote(QModelIndex)</slot>
   <slot>selectFont()</slot>
-  <slot>readSettings()</slot>
  </slots>
 </ui>
