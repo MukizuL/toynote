@@ -86,7 +86,7 @@ jobs:
 #        mingw32-make.exe -version  
     -
       name: Configure QMake Proyect
-      working-directory: ${{github.workspace}}
+      working-directory: ${{github.workspace}}/build
       env:
         CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
       run: qmake ${{github.workspace}}/toynote.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -95,7 +95,7 @@ jobs:
       name: Build proyect
       working-directory: ${{github.workspace}}/build
       run: |
-        mingw32-make.exe
+        mingw32-make.exe -f ${{github.workspace}}/build/Makefile qmake_all
     -
       name: Compress portable program
       run: |
