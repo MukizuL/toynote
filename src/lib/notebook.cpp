@@ -94,8 +94,8 @@ QVariant Notebook::data(const QModelIndex &index, int role) const
         }
     }
     else if (role == Qt::FontRole){                                                 //Added Qt::FontRole handler
-        QSettings settings("SiberianUniversityProject","Toynote");
-        QFont font = qvariant_cast<QFont>(settings.value("Font"));
+        QSettings settings("SiberianUniversityProject","Toynote");                  //Get value of setting "Font" it is a QVariant
+        QFont font = qvariant_cast<QFont>(settings.value("Font"));                  //qvariant_cast to QFont the nreturn font
         return font;
     }
     // Игнорируем все остальные запросы, возвращая пустой QVariant

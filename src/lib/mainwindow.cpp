@@ -54,11 +54,11 @@ MainWindow::MainWindow(QWidget *parent) :
     // сигнал MainWindow::notebookCreated будет вызывать код, записанный в
     // фигурных скобках, то есть метод MainWindow::setWindowModified() с параметром true.
     connect(this, &MainWindow::notebookCreated, [this] { setWindowModified(true); });                   //Fix modified file status
-    connect(this, &MainWindow::notebookSaved, [this] { setWindowModified(false); });                    //
+    connect(this, &MainWindow::notebookSaved, [this] { setWindowModified(false); });                    //If created, it is modified. If saved, it's not.
     // Здесь можно присоединить сигналы готовности/закрытия записной книжки к слотам, отвечающим за
     // включение/отключение действий, требующих её наличия
     connect(this, &MainWindow::notebookReady, [this] { setEnableNotebookUi(true); });                   //Simple connect signals to slots
-    connect(this, &MainWindow::notebookClosed, [this] { setEnableNotebookUi(false); });                 //
+    connect(this, &MainWindow::notebookClosed, [this] { setEnableNotebookUi(false); });                 //Ready - on, Closed - off
     // Отображаем GUI, сгенерированный из файла mainwindow.ui, в данном окне
     mUi->setupUi(this);
     // Настраиваем таблицу заметок, чтобы её последняя колонка занимала всё доступное место
@@ -380,12 +380,12 @@ void MainWindow::deleteNotes()
     // Для хранения номеров строк создаём STL-контейнер "множество", элементы
     // которого автоматически упорядочиваются по возрастанию
     std::set<int> rows;
-    QString indexNotesString;
-    QVariant indexNotes;
-    int k = 1;                                              //
-    for (const QModelIndex& index : idc) {                  //
+    QString indexNotesString;                               //Get data from QModelIndexList to QVariant
+    QVariant indexNotes;                                    //Then convert QVariant to String
+    int k {};                                               //That is for showing what notes we delete
+    for (const QModelIndex& index : idc) {                  //Also if number of titles is more than 1, we append a comma
         indexNotes = index.data();                          //
-        if(k % 2 == 0){                                     //
+        if(k >= 1){                                         //
                 indexNotesString.append(", ");              //
             }                                               //
         indexNotesString.append(indexNotes.toString());     //Creating string of titles with commas
@@ -419,7 +419,7 @@ void MainWindow::deleteNotes()
                 // Удаляем строку
                 mNotebook->erase(*it);
             }
-            setWindowModified(true);                    //If deleted, file is modified
+            setWindowModified(true);                        //If deleted, file is modified
     }
     }
 }
