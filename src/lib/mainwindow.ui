@@ -114,9 +114,6 @@
    <property name="toolTip">
     <string>Add a new note</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+6</string>
-   </property>
   </action>
   <action name="actionDelete_Notes">
    <property name="icon">
@@ -129,16 +126,10 @@
    <property name="toolTip">
     <string>Delete the selected note(s)</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+7</string>
-   </property>
   </action>
   <action name="actionAbout">
    <property name="text">
     <string>&amp;About Toynote</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+8</string>
    </property>
   </action>
   <action name="actionSave">
@@ -201,9 +192,6 @@
    <property name="text">
     <string>Visit Website</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+9</string>
-   </property>
   </action>
   <action name="actionExit">
    <property name="icon">
@@ -220,9 +208,6 @@
   <action name="actionFont">
    <property name="text">
     <string>Font</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+F</string>
    </property>
   </action>
  </widget>
