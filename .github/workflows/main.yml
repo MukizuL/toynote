@@ -92,11 +92,11 @@ jobs:
       run: qmake ${{github.workspace}}/toynote.pro -spec win32-g++ -o ${{github.workspace}}/build "CONFIG+=qtquickcompiler" 
       #cmake -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -G "CodeBlocks - MinGW Makefiles" -B ${{github.workspace}}/build
     -
-      name: Check paths
-      working-directory: ${{github.workspace}}
-      run: |
-        cd build && ls
-    -
+#      name: Check paths
+#      working-directory: ${{github.workspace}}
+#      run: |
+#        cd build && ls
+#    -
       name: Build project
       working-directory: ${{github.workspace}}
       run: |
