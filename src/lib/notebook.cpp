@@ -46,7 +46,7 @@ const Note &Notebook::operator[](Notebook::SizeType idx) const
 
 Notebook::SizeType Notebook::size() const
 {
-    return mNotes.size();
+    return static_cast<Notebook::SizeType>(mNotes.size());
 }
 
 /*!
@@ -57,7 +57,7 @@ Notebook::SizeType Notebook::size() const
  */
 int Notebook::rowCount(const QModelIndex &parent) const
 {
-    return !parent.isValid() ? mNotes.size() : 0;
+    return static_cast<int>(!parent.isValid() ? mNotes.size() : 0);
 }
 
 /*!
@@ -176,7 +176,7 @@ Notebook::SizeType Notebook::load(QDataStream &ist)
     // В соответствии с требованиями Qt, уведомляем привязанные виды о том,
     // что мы закончили сброс модели
     endResetModel();
-    return mNotes.size();
+    return static_cast<Notebook::SizeType>(mNotes.size());
 }
 
 void Notebook::push_back(const Note &note)
