@@ -109,7 +109,7 @@ void MainWindow::displayAbout()
     // Устанавливаем основной текст в окне aboutDlg
     aboutDlg.setText(tr("%1 %2<br>"
         "Author: <a href=\"mailto:kpushkaryov@gmail.com\">Kirill Pushkaryov</a>, 2021.<br>"
-        "Contributor: <a href=\"mailto:lignitionmukizu@gmail.com\">Artyom Shcheglov</a>, 2023.<br>" //A0.1
+        "Contributor: <a href=\"mailto:lignitionmukizu@gmail.com\">Artyom Shcheglov KI22-07B 032212434</a>, 2023.<br>" //A0.1
         "This application is dynamically linked against the "
         "<a href=\"https://www.qt.io/developers/\">Qt Library</a> "
         "v. %3, which is under the LGPLv3 license.<br>"
