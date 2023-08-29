@@ -105,6 +105,8 @@ void MainWindowTest::testVisitWebsite()
     // Use the QTRY_ form first to run the event loop
     QTRY_VERIFY2(https_handler.visited(), "Correct HTTPS URL isn't visited");
     QVERIFY2(!http_handler.visited(), "Incorrect HTTP URL is visited");
+    QDesktopServices::unsetUrlHandler("http");
+    QDesktopServices::unsetUrlHandler("https");
 }
 
 QAction *MainWindowTest::triggerAction(const QString &name)
